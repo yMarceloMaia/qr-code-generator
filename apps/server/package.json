@@ -1,0 +1,44 @@
+{
+  "name": "projetos",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node ./build/index.js",
+    "build": "tsc",
+    "dev": "ts-node-dev ./src/index.ts",
+    "start:dev": "nodemon index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@graphql-tools/schema": "^10.0.2",
+    "bcrypt": "^5.1.1",
+    "crc": "^4.3.2",
+    "dotenv": "^16.3.1",
+    "graphql": "^16.8.1",
+    "graphql-import-node": "^0.0.5",
+    "jsonwebtoken": "^9.0.2",
+    "koa": "^2.15.0",
+    "koa-bodyparser": "^2.5.0",
+    "koa-graphql": "^0.12.0",
+    "koa-orm": "^3.2.1",
+    "koa-router": "^12.0.1",
+    "koa2-cors": "^2.0.6",
+    "mongoose": "^8.0.3",
+    "relay-compiler": "^16.1.0"
+  },
+  "devDependencies": {
+    "@types/bcrypt": "^5.0.2",
+    "@types/jsonwebtoken": "^9.0.5",
+    "@types/koa": "^2.13.12",
+    "@types/koa-bodyparser": "^4.3.12",
+    "@types/koa-router": "^7.4.8",
+    "@types/koa2-cors": "^2.0.5",
+    "graphql-tools": "^9.0.0",
+    "ts-node-dev": "^2.0.0",
+    "typescript": "^5.3.3"
+  }
+}
