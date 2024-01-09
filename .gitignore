@@ -1,0 +1,4 @@
+node_modules
+.env
+dist 
+proposed-standard.md
