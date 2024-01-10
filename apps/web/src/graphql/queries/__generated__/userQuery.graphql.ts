@@ -1,5 +1,5 @@
 /**
- * @generated SignedSource<<71f59f2bfc52e0ef44c499a53e50f5c2>>
+ * @generated SignedSource<<e506d8ec6391655072564419e28b4ada>>
  * @lightSyntaxTransform
  * @nogrep
  */
@@ -9,15 +9,17 @@
 // @ts-nocheck
 
 import { ConcreteRequest, Query } from 'relay-runtime';
-export type TestQuery$variables = Record<PropertyKey, never>;
-export type TestQuery$data = {
+export type userQuery$variables = Record<PropertyKey, never>;
+export type userQuery$data = {
   readonly users: ReadonlyArray<{
+    readonly email: string;
     readonly name: string;
+    readonly phoneNumber: string | null | undefined;
   }> | null | undefined;
 };
-export type TestQuery = {
-  response: TestQuery$data;
-  variables: TestQuery$variables;
+export type userQuery = {
+  response: userQuery$data;
+  variables: userQuery$variables;
 };
 
 const node: ConcreteRequest = (function(){
@@ -36,6 +38,20 @@ var v0 = [
         "kind": "ScalarField",
         "name": "name",
         "storageKey": null
+      },
+      {
+        "alias": null,
+        "args": null,
+        "kind": "ScalarField",
+        "name": "email",
+        "storageKey": null
+      },
+      {
+        "alias": null,
+        "args": null,
+        "kind": "ScalarField",
+        "name": "phoneNumber",
+        "storageKey": null
       }
     ],
     "storageKey": null
@@ -46,7 +62,7 @@ return {
     "argumentDefinitions": [],
     "kind": "Fragment",
     "metadata": null,
-    "name": "TestQuery",
+    "name": "userQuery",
     "selections": (v0/*: any*/),
     "type": "Query",
     "abstractKey": null
@@ -55,20 +71,20 @@ return {
   "operation": {
     "argumentDefinitions": [],
     "kind": "Operation",
-    "name": "TestQuery",
+    "name": "userQuery",
     "selections": (v0/*: any*/)
   },
   "params": {
-    "cacheID": "fe906771e63dfaa67d88109648034be5",
+    "cacheID": "6b2a829f1b51f8854470b4cc464c8988",
     "id": null,
     "metadata": {},
-    "name": "TestQuery",
+    "name": "userQuery",
     "operationKind": "query",
-    "text": "query TestQuery {\n  users {\n    name\n  }\n}\n"
+    "text": "query userQuery {\n  users {\n    name\n    email\n    phoneNumber\n  }\n}\n"
   }
 };
 })();
 
-(node as any).hash = "886fecd3a8d9911ceef68ee53795e094";
+(node as any).hash = "cdff3bcdd6b357229d5c571559f3cb89";
 
 export default node;

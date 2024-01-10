@@ -10,25 +10,18 @@ interface UserInput {
     phoneNumber: String;
 }
 
-// interface AddressInput {
-//     street: String;
-//     city: String;
-//     state: String;
-//     zipCode: String;
-// }
-
-// interface BankAccountInput {
-//     agencyNumber: String;
-//     accountNumber: String;
-//     accountType: String;
-//     bankName: String;
-//     bankCode: String;
-// }
+interface UserInputLogin {
+    email: String;
+    password: String;
+}
 
 const authResolvers = {
     Mutation: {
-        login: async (_: Context, { email, password }: { email: String, password: String }) => {
+        login: async (_: Context, { input }: { input: UserInputLogin }) => {
+            console.log("aquiiiiiiii")
             try {
+                const { email, password } = input
+
                 const user = await User.findOne({ email })
 
                 console.log(user)
@@ -37,7 +30,7 @@ const authResolvers = {
 
                 const passwordIsCorrect = await comparePasswords(password as string, user.password)
 
-                if(!passwordIsCorrect) throw new Error("E-mail or password is wrong")
+                if (!passwordIsCorrect) throw new Error("E-mail or password is wrong")
 
                 const payload = {
                     id: user._id.toString(),
@@ -46,7 +39,7 @@ const authResolvers = {
 
                 const token = createToken(payload)
 
-                return {user, token}
+                return { user, token }
             } catch (error) {
                 console.error(error);
 

@@ -17,8 +17,13 @@ input UserInput {
   phoneNumber: String
 }
 
+input UserInputLogin {
+  email: String!
+  password: String!
+}
+
 type Mutation {
-  login(email: String!, password: String!): AuthPayload
+  login(input: UserInputLogin): AuthPayload
   signup(input: UserInput): AuthPayload
   createPayload(name: String!, value: String!, key: String!, city: String!, txtId: String): Payload
 }

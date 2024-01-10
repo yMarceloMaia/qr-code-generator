@@ -8,7 +8,7 @@ const typeDefs = mergeTypeDefs([typeDefsUser, typeDefsQrcode])
 
 const schema = makeExecutableSchema({
   typeDefs,
-  resolvers,
+  resolvers
 });
 
 export default schema;

@@ -11,7 +11,7 @@ const typeDefsUser = `
   }
 
   type Mutation {
-    login(email: String!, password: String!): AuthPayload
+    login(input: UserInputLogin): AuthPayload
     signup(input: UserInput): AuthPayload
   }
 
@@ -26,6 +26,11 @@ const typeDefsUser = `
     email: String!
     password: String!
     phoneNumber: String
+  }
+
+  input UserInputLogin {
+    email: String!
+    password: String!
   }
 
   type AuthPayload {
