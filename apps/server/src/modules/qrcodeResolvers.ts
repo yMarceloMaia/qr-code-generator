@@ -19,7 +19,7 @@ function formatTransactionAmount(text: String): String {
 
 function formatTxtId(text: String): String {
     const textSize = text.length
-    return textSize <= 9 ? `050${textSize}${text}` : `05${textSize}${text}`
+    return textSize <= 9 ? `0${textSize}${text}` : `${textSize}${text}`
 }
 
 function formatName(text: String): String {
@@ -51,12 +51,14 @@ function calcCRC16CCITT(subject: string): string {
 
 const qrcodeResolvers = {
     Mutation: {
-        createPayload: async (_: Context, { name, value, key, city, txtId }: QrcodeInput) => {
+        createPayload: async (_: Context, { input }: { input: QrcodeInput }) => {
             try {
+                const { name, value, key, city, txtId } = input
+               
                 const merchantAccountInformation = `0014BR.GOV.BCB.PIX01${key.length}${key}`
 
                 const addDataFieldSize = `05${txtId?.length.toString().padStart(2, '0')}${txtId}`
-                
+
                 const payloadObj: PayloadObj = {
                     payloadFormat: '000201',
                     merchantAccount: `26${merchantAccountInformation.length}${merchantAccountInformation}`,
@@ -66,9 +68,11 @@ const qrcodeResolvers = {
                     countrycode: '5802BR',
                     merchantName: `59${formatName(name)}`,
                     merchantCity: `60${formatCity(city)}`,
-                    addDataField: `62${txtId ? addDataFieldSize.length : ''}${txtId ? addDataFieldSize : ''}`,
+                    addDataField: `62${txtId ? formatTxtId(addDataFieldSize) : '070503***'}`,
                     crc16: '6304'
                 };
+
+                console.log(payloadObj)
 
                 let payload = ''
                 for (let key in payloadObj) {
@@ -77,7 +81,7 @@ const qrcodeResolvers = {
 
                 payload += calcCRC16CCITT(payload)
 
-                return {payload}
+                return { payload }
             } catch (error) {
                 console.error(error);
 

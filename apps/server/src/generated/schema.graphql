@@ -25,8 +25,16 @@ input UserInputLogin {
 type Mutation {
   login(input: UserInputLogin): AuthPayload
   signup(input: UserInput): AuthPayload
-  createPayload(name: String!, value: String!, key: String!, city: String!, txtId: String): Payload
+  createPayload(input: QrcodeInput): Payload
 }
+
+input QrcodeInput {
+    name: String!
+    value: String!
+    key: String!
+    city: String!
+    txtId: String
+}  
 
 type AuthPayload {
   token: String

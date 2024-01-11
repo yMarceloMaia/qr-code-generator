@@ -1,8 +1,16 @@
 const typeDefsQrcode = `
     type Mutation {
-        createPayload(name: String!, value: String!, key: String!, city: String!, txtId: String): Payload
+        createPayload(input: QrcodeInput): Payload
     }
 
+    input QrcodeInput {
+        name: String!
+        value: String!
+        key: String!
+        city: String!
+        txtId: String
+    }
+    
     type Payload {
         payload: String
     }
