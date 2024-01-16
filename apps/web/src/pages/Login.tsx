@@ -28,6 +28,7 @@ const Login = () => {
                 }
 
                 const { login } = response as authLoginMutation$data
+                console.log(login)
 
                 if (login?.token) {
                     localStorage.setItem("token", login.token)

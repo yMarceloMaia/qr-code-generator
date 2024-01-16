@@ -1,7 +1,6 @@
 type Query {
   users: [User!]
   userByName(name: String!): User
-  currentUser: User
 }
 
 type User {
@@ -26,6 +25,7 @@ type Mutation {
   login(input: UserInputLogin): AuthPayload
   signup(input: UserInput): AuthPayload
   createPayload(input: QrcodeInput): Payload
+  authentication(token: String): PayloadAuth
 }
 
 input QrcodeInput {
@@ -43,4 +43,12 @@ type AuthPayload {
 
 type Payload {
   payload: String
+}
+
+type PayloadAuth {
+  id: String
+  name: String
+  iat: String
+  exp: String
+  authenticate: Boolean
 }

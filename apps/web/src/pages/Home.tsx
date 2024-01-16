@@ -1,21 +1,21 @@
 import { useState } from "react";
 import { useMutation } from "react-relay";
-import { useNavigate } from "react-router-dom";
 import { qrcodeCreatePayloadMutation$data } from "../graphql/mutations/__generated__/qrcodeCreatePayloadMutation.graphql";
 import { CreatePayloadMutation } from "../graphql/mutations/qrcode";
 import QrGenerator from "../components/QrGenerator";
+import useAuthentication from "../hooks/useAuthentication";
 
 
 export const Home = () => {
+    const [authLoading] = useAuthentication()
+
     const [name, setName] = useState("")
     const [value, setValue] = useState("")
     const [key, setKey] = useState("")
     const [city, setCity] = useState("")
     const [txtId, setTxtId] = useState("")
 
-    const navigate = useNavigate()
-
-    const [login, isInFlight] = useMutation(CreatePayloadMutation);
+    const [payload, isInFlight] = useMutation(CreatePayloadMutation);
 
     const createPayloadQrcode = () => {
         const input = {
@@ -28,7 +28,7 @@ export const Home = () => {
             },
         };
 
-        login({
+        payload({
             variables: input,
             onCompleted(response, errors) {
                 if (errors) {
@@ -44,10 +44,9 @@ export const Home = () => {
         });
     };
 
-    if (isInFlight) {
+    if (isInFlight || !authLoading) {
         return <h1>Loading...</h1>;
     }
-    
 
     return (
         <>
@@ -58,7 +57,7 @@ export const Home = () => {
                     createPayloadQrcode();
                 }}
             >
-                 <label>
+                <label>
                     Name:
                     <input
                         type="name"

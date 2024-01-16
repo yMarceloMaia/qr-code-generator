@@ -25,3 +25,15 @@ export const SignupMutation = graphql`
     }
   }
 `
+
+export const AuthenticateMutation = graphql`
+  mutation authAuthenticateMutation($token: String!) {
+    authentication(token: $token) {
+      id
+      name
+      iat
+      exp
+      authenticate
+    }
+  }
+`

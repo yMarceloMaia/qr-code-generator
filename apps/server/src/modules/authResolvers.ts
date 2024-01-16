@@ -1,7 +1,8 @@
 import { Context } from "koa"
 import User from "../models/user";
-import { createToken } from "../services/tokenManager";
+import { createToken, getPayload } from "../services/tokenManager";
 import { comparePasswords, hashPassword } from "../services/auth";
+import { JwtPayload } from "jsonwebtoken";
 
 interface UserInput {
     name: String;
@@ -73,6 +74,29 @@ const authResolvers = {
                 const token = createToken(payload)
 
                 return { user: newUser, token };
+            } catch (error) {
+                console.error(error);
+
+                if (error) {
+                    throw new Error(error.toString());
+                }
+                throw new Error("erro");
+            }
+        },
+        authentication: async (_: Context, { token }: { token: string }) => {
+            try {
+                const tokenIsAuth = getPayload(token) as JwtPayload
+                // console.log(tokenIsAuth)
+
+                if (tokenIsAuth?.id) {
+
+                    const id = tokenIsAuth.id
+                    const userExist = await User.findById(id)
+
+                    return { ...tokenIsAuth, authenticate: userExist ? true : false }
+                }
+
+                return false
             } catch (error) {
                 console.error(error);
 

@@ -12,22 +12,8 @@ interface PayloadObj {
     [key: string]: string;
 }
 
-function formatTransactionAmount(text: String): String {
-    const textSize = text.length
-    return textSize <= 9 ? `0${textSize}${text}` : `${textSize}${text}`
-}
-
-function formatTxtId(text: String): String {
-    const textSize = text.length
-    return textSize <= 9 ? `0${textSize}${text}` : `${textSize}${text}`
-}
-
-function formatName(text: String): String {
-    const textSize = text.length
-    return textSize <= 9 ? `0${textSize}${text}` : `${textSize}${text}`
-}
-
-function formatCity(text: String): String {
+// references: https://www.bcb.gov.br/content/estabilidadefinanceira/spb_docs/ManualBRCode.pdf
+function formatToBrCode(text: String): String {
     const textSize = text.length
     return textSize <= 9 ? `0${textSize}${text}` : `${textSize}${text}`
 }
@@ -64,11 +50,11 @@ const qrcodeResolvers = {
                     merchantAccount: `26${merchantAccountInformation.length}${merchantAccountInformation}`,
                     merchantCategoryCode: '52040000',
                     transactionCurrency: '5303986',
-                    transactionAmount: `54${formatTransactionAmount(value)}`,
+                    transactionAmount: `54${formatToBrCode(value)}`,
                     countrycode: '5802BR',
-                    merchantName: `59${formatName(name)}`,
-                    merchantCity: `60${formatCity(city)}`,
-                    addDataField: `62${txtId ? formatTxtId(addDataFieldSize) : '070503***'}`,
+                    merchantName: `59${formatToBrCode(name)}`,
+                    merchantCity: `60${formatToBrCode(city)}`,
+                    addDataField: `62${txtId ? formatToBrCode(addDataFieldSize) : '070503***'}`,
                     crc16: '6304'
                 };
 

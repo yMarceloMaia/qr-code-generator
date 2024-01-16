@@ -16,7 +16,7 @@ function createToken(payload: any) {
 }
 
 // Verify token and return a value boolean
-function getPayload(token: string) {
+function getPayload(token: string): string | jwt.JwtPayload | null {
     try {
         const payload = jwt.verify(
             token,

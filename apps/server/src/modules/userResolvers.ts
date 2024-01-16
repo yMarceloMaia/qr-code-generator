@@ -14,9 +14,6 @@ const userResolvers = {
     },
     userByName: async (_: Context, { name }: { name: string }) => {
       return await User.findOne({ name });
-    },
-    currentUser: async (_: Context, { user }: { user: UserInput }) => {
-      return user;
     }
   },
 }

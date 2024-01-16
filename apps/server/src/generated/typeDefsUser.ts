@@ -2,7 +2,6 @@ const typeDefsUser = `
   type Query {
     users: [User!]
     userByName(name: String!): User
-    currentUser: User
   }
 
   type User {
@@ -13,6 +12,7 @@ const typeDefsUser = `
   type Mutation {
     login(input: UserInputLogin): AuthPayload
     signup(input: UserInput): AuthPayload
+    authentication(token: String): PayloadAuth
   }
 
   type User {
@@ -36,6 +36,14 @@ const typeDefsUser = `
   type AuthPayload {
     token: String
     user: User
+  }
+
+  type PayloadAuth {
+    id: String
+    name: String
+    iat: String
+    exp: String
+    authenticate: Boolean
   }
 `
 
