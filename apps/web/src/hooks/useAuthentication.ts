@@ -29,7 +29,9 @@ const useAuthentication = () => {
                     }
                     const { authentication } = response as authAuthenticateMutation$data
 
-                    if (!authentication?.authenticate) {
+                    if (authentication?.authenticate) {
+                        navigate("/")
+                    } else {
                         navigate("/login")
                     }
                 },
